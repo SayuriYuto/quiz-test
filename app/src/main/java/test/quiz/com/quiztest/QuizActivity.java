@@ -16,13 +16,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Struct;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
 
     CheckBox option1,option2,option3,option4;
     Button submitQuestion;
-    TextView queDisplay,queID;
+    TextView queDisplay,queID,score;
     int queNumber = 0,answerSelected = 0;
     String [] questionThread;
     String [] separateThread = new String[7];
@@ -65,6 +66,7 @@ public class QuizActivity extends AppCompatActivity {
         option2 = findViewById(R.id.idOption2);
         option3 = findViewById(R.id.idOption3);
         option4 = findViewById(R.id.idOption4);
+        score = findViewById(R.id.idScore);
 
         /*Setting Display*/
 
@@ -145,7 +147,10 @@ public class QuizActivity extends AppCompatActivity {
 
                     /*User selected the correct option*/
                     if (answerSelected == Integer.valueOf(separateThread[1])) {
-
+                        int oldscore = Integer.parseInt(score.getText().toString());
+//                       String newscore = (String)oldscore+1;
+                        oldscore+=1;
+                        score.setText(String.valueOf(oldscore));
                         /*forward to next question after 2 seconds*/
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
